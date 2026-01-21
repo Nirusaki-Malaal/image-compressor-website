@@ -1,0 +1,401 @@
+:root {
+            /* Default: Dark Mode (Hollow/Soul Reaper) */
+            --shinigami-black: #ffffff; /* Text/Borders */
+            --hollow-white: #1a1a1a;    /* Background */
+            --reiatsu-orange: #ff5e00;  /* Accent */
+            --getsuga-black: #f5f5f5;   /* Subtitle */
+            --switch-bg: #333;
+        }
+
+        /* Light Mode (Quincy/Manga Page) */
+        body.light-mode {
+            --shinigami-black: #050505;
+            --hollow-white: #ffffff;
+            --getsuga-black: #1a1a1a;
+            --switch-bg: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            background-color: var(--hollow-white);
+            color: var(--shinigami-black);
+            /* FIX: Strict viewport height */
+            height: 100vh;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            /* FIX: No scrollbars allowed */
+            overflow: hidden;
+            position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            padding: 0;
+        }
+
+        /* THEME SWITCHER */
+        .theme-switch-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--switch-bg);
+            transition: .4s;
+            border: 2px solid var(--shinigami-black);
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 5px;
+            bottom: 5px;
+            background-color: var(--shinigami-black);
+            transition: .4s;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); /* Diamond shape */
+        }
+
+        input:checked + .slider {
+            background-color: var(--reiatsu-orange);
+            border-color: var(--reiatsu-orange);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+            background-color: #fff;
+        }
+
+        .container {
+            background-color: var(--hollow-white);
+            width: min(92%, 700px); 
+            /* FIX: Use Flexbox to vertical center and constrain height */
+            max-height: 98vh; /* Ensure it never exceeds viewport */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+            /* FIX: Use vh units for padding to scale with height */
+            padding: 3vh 2rem;
+            margin: 0 auto;
+            
+            border: 4px solid var(--shinigami-black); 
+            box-shadow: 15px 15px 0px var(--reiatsu-orange);
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            clip-path: polygon(
+                0 0, 
+                100% 0, 
+                100% 95%, 
+                95% 100%, 
+                0 100%
+            );
+            transition: width 0.3s ease, padding 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        h1 {
+            font-family: 'Teko', sans-serif;
+            /* Scale font based on viewport min dimension to fit both landscape/portrait */
+            font-size: clamp(2.5rem, 5vmin, 5rem);
+            margin: 0;
+            line-height: 1;
+            color: var(--shinigami-black);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            border-bottom: 4px solid var(--shinigami-black);
+            display: inline-block;
+            padding-bottom: 0.5vh;
+            margin-bottom: 1vh;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        h1::after {
+            content: '死神';
+            position: absolute;
+            top: -10px;
+            right: -25px;
+            font-size: clamp(0.8rem, 2vw, 1.2rem);
+            background: var(--shinigami-black);
+            color: var(--hollow-white);
+            padding: 2px 6px;
+            transform: rotate(5deg);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        p.subtitle {
+            color: var(--getsuga-black);
+            font-size: clamp(0.8rem, 2vmin, 1.2rem);
+            margin-bottom: 2vh; /* Dynamic vertical margin */
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        /* Large Drop Zone */
+        .file-upload-wrapper {
+            position: relative;
+            margin-bottom: 2vh; /* Dynamic vertical margin */
+        }
+
+        input[type="file"] { display: none; }
+
+        .file-upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            border: 2px dashed var(--shinigami-black);
+            /* FIX: Dynamic padding based on viewport height */
+            padding: 4vh 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--shinigami-black);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-upload-label::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--shinigami-black);
+            transition: left 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 0;
+        }
+
+        .file-upload-label::before { left: -100%; }
+        .file-upload-label:hover::before { left: 0; }
+
+        .file-upload-label:hover {
+            color: var(--hollow-white);
+            border-style: solid;
+        }
+
+        .file-upload-label:hover .icon-upload {
+            fill: var(--hollow-white);
+            transform: scale(1.1);
+        }
+
+        .icon-upload {
+            /* Scale icon with viewport */
+            width: 6vmin;
+            height: 6vmin;
+            min-width: 40px;
+            min-height: 40px;
+            margin-bottom: 1vh;
+            fill: var(--shinigami-black);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .upload-text {
+            z-index: 1;
+            font-weight: bold;
+            font-size: clamp(0.9rem, 2.5vmin, 1.2rem);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .file-name-display {
+            margin-top: 1vh;
+            font-size: 0.9rem;
+            color: var(--shinigami-black);
+            font-weight: 700;
+            min-height: 20px;
+            font-family: 'Courier New', monospace;
+            transition: color 0.3s ease;
+        }
+
+        /* Responsive Button */
+        button {
+            background-color: var(--shinigami-black);
+            color: var(--hollow-white);
+            border: none;
+            /* FIX: Dynamic padding */
+            padding: 1.5vh 3rem;
+            font-family: 'Teko', sans-serif;
+            font-weight: 600;
+            font-size: clamp(1.5rem, 4vmin, 2.2rem);
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            position: relative;
+            transition: all 0.2s;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+        button:hover {
+            background-color: var(--reiatsu-orange);
+            color: #fff;
+            box-shadow: 0 0 20px var(--reiatsu-orange);
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+        }
+        
+        button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent);
+            transform: rotate(45deg) translate(-100%, -100%);
+            transition: transform 0.4s;
+        }
+        
+        button:hover::after {
+            transform: rotate(45deg) translate(100%, 100%);
+        }
+
+        button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            color: #888;
+            box-shadow: none;
+        }
+
+        .loader {
+            display: none;
+            width: 30px;
+            height: 30px;
+            border: 4px solid var(--shinigami-black);
+            border-top: 4px solid var(--reiatsu-orange);
+            border-radius: 50%;
+            animation: spin-slash 0.6s linear infinite;
+        }
+        
+        @keyframes spin-slash {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        #status-msg {
+            margin-top: 1.5vh;
+            font-size: 0.9rem;
+            display: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 4px solid var(--reiatsu-orange);
+            padding-left: 10px;
+            text-align: left;
+            margin-left: 10px;
+            color: var(--shinigami-black);
+            transition: color 0.3s ease;
+        }
+
+        .credits {
+            margin-top: 2vh;
+            font-size: 0.7rem;
+            color: #888;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-top: 1px solid #333; /* Darker border */
+            padding-top: 1.5vh;
+        }
+
+        .credits a {
+            color: var(--shinigami-black);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .credits a:hover {
+            color: var(--reiatsu-orange);
+            text-shadow: 0 0 5px rgba(255, 94, 0, 0.3);
+        }
+
+        /* Responsive Breakpoints for ultra-small height screens */
+        @media (max-height: 600px) {
+            .container {
+                padding: 1vh 2rem;
+                border-width: 2px;
+            }
+            .file-upload-label {
+                padding: 2vh 1rem;
+            }
+            .icon-upload {
+                height: 30px;
+                width: 30px;
+            }
+            button {
+                padding: 1vh 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 2vh 1rem;
+                box-shadow: 8px 8px 0px var(--reiatsu-orange);
+            }
+            .theme-switch-container {
+                top: 10px;
+                right: 10px;
+                transform: scale(0.8); /* Smaller switch on mobile */
+            }
+        }
+
+        @media (min-width: 1441px) {
+            .container {
+                width: 50%;
+                max-width: 1100px; 
+                padding: 5vh 5rem; /* Larger padding on big screens */
+                border-width: 6px;
+                box-shadow: 25px 25px 0px var(--reiatsu-orange);
+            }
+            .file-upload-label {
+                padding: 6vh;
+            }
+            /* More spacing for giant screens */
+            h1 { margin-bottom: 2vh; }
+            p.subtitle { margin-bottom: 4vh; }
+        }

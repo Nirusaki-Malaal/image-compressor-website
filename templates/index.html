@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="title" content="Image Compressor">
+    <meta name="description" content="A Website which Compresses Images.">
+    <meta name="keywords" content="Image Compressor">
+    <meta name="author" content="Nirusaki">
+
+
+    <title>Image Compressor</title>
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Teko:wght@600&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+   <div class="theme-switch-container">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle" onchange="toggleTheme()">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <div class="container">
+        <h1>Image Compressor</h1>
+        <p class="subtitle">Compress your file sizes</p>
+
+        <div class="file-upload-wrapper">
+            <label for="dir" class="file-upload-label">
+                <svg class="icon-upload" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L15 8H9L12 2ZM12 22L9 16H15L12 22ZM2 12L8 9V15L2 12ZM22 12L16 15V9L22 12Z"/>
+                    <circle cx="12" cy="12" r="2" />
+                </svg>
+                <span class="upload-text">Select Image</span>
+            </label>
+            <input id="dir" type="file" accept=".jpg,.png,.jpeg,.heic" onchange="showFileName()">
+            <div id="file-name" class="file-name-display"></div>
+        </div>
+
+        <button onclick="getDirectory()" id="submit-btn">
+            <div class="btn-content">
+                <span id="btn-text">COMPRESS</span>
+                <div id="loader" class="loader"></div>
+            </div>
+        </button>
+
+        <p id="status-msg"></p>
+
+        <div class="credits">
+            Made by <a href="https://github.com/Nirusaki-Malaal" target="_blank">Nirusaki</a> 
+            In Collaboration with <a href="https://github.com/PrateekDaemon" target="_blank">PrateeK</a>
+        </div>
+    </div> 
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
