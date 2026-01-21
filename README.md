@@ -28,62 +28,52 @@ This project includes a lightweight backend (Flask/Python) and a clean frontend 
 
 1. Clone the repository
 
-   git clone https://github.com/Nirusaki-Malaal/image-compressor-website.git  
+```git clone https://github.com/Nirusaki-Malaal/image-compressor-website.git  
    cd image-compressor-website
+```
 
 2. (Optional) Create and activate a virtual environment
 
-   python -m venv venv  
+```python -m venv venv  
    venv\Scripts\activate   (Windows)  
    source venv/bin/activate   (Linux/macOS)
-
+```
 3. Install dependencies
 
-   pip install -r requirements.txt
+```pip install -r requirements.txt
+```
 
 ---
 
 ## ▶️ Usage
 
 1. Start the server
-
+```
    python app.py
-
+```
 2. Open your browser and go to
-
+```
    http://localhost:5000
-
-3. Upload an image, compress it, and download the optimized version.
-
+```
+3. Upload an image, compress it, and automatically downloads the optimized version.
 ---
 
 ## 🧪 Supported Image Formats
 
 - JPEG / JPG  
-- PNG  
-- WebP  
-
+- PNG
 ---
 
 ## 📦 Deployment
 
 You can deploy this project on platforms like:
-
-- Heroku  
+- Heroku
 - Render  
 - PythonAnywhere  
 - Any server that supports Python + Flask
 
 ---
 
-## 🎨 Screenshots
-
-Add screenshots to showcase the UI:
-
-![Upload Screen](path/to/screenshot1.png)  
-![Compressed Result](path/to/screenshot2.png)
-
----
 
 ## 🤝 Contributing
 
