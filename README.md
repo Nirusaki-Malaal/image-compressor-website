@@ -28,19 +28,22 @@ This project includes a lightweight backend (Flask/Python) and a clean frontend 
 
 1. Clone the repository
 
-```git clone https://github.com/Nirusaki-Malaal/image-compressor-website.git  
+```
+   git clone https://github.com/Nirusaki-Malaal/image-compressor-website.git  
    cd image-compressor-website
 ```
 
 2. (Optional) Create and activate a virtual environment
 
-```python -m venv venv  
+```
+   python -m venv venv  
    venv\Scripts\activate   (Windows)  
    source venv/bin/activate   (Linux/macOS)
 ```
 3. Install dependencies
 
-```pip install -r requirements.txt
+```
+   pip install -r requirements.txt
    sudo apt install ffmpeg
 ```
 
