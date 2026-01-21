@@ -41,6 +41,7 @@ This project includes a lightweight backend (Flask/Python) and a clean frontend 
 3. Install dependencies
 
 ```pip install -r requirements.txt
+   sudo apt install ffmpeg
 ```
 
 ---
